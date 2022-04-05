@@ -16,7 +16,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  x86:
+  vanilla:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v3
@@ -53,8 +53,8 @@ jobs:
     - name: relocate apks
       run: |
         mkdir -p app/build/outputs/apk/release
-        cp "./app/build/outputs/apk/default/release/app-default-release-unsigned.apk"  app/build/outputs/apk/release/
-        cp "./app/build/outputs/apk/api29/release/app-api29-release-unsigned.apk" app/build/outputs/apk/release/
+        cp "./app/build/outputs/apk/default/release/app-default-release-unsigned.apk"  app/build/outputs/apk/release/mpv-default.apk
+        cp "./app/build/outputs/apk/api29/release/app-api29-release-unsigned.apk" app/build/outputs/apk/release/mpv-api29.apk
     - name: Sign APK
       uses: r0adkll/sign-android-release@v1
       # ID used to access action output
@@ -64,7 +64,7 @@ jobs:
         signingKeyBase64: ${{ secrets.SIGNING_KEY }}
         alias: ${{ secrets.ALIAS }}
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-        keyPassword: ${{ secrets.KEY_PASSWORD }}
+      #  keyPassword: ${{ secrets.KEY_PASSWORD }}
     - name : upload APKs
       uses: actions/upload-artifact@v2
       with:
@@ -75,7 +75,7 @@ jobs:
 
 
 
-  Vanilla:
+  x86:
       runs-on: ubuntu-20.04
       steps:
       - uses: actions/checkout@v3
@@ -112,8 +112,8 @@ jobs:
       - name: relocate apks
         run: |
           mkdir -p app/build/outputs/apk/release
-          cp "./app/build/outputs/apk/default/release/app-default-release-unsigned.apk"  app/build/outputs/apk/release/
-          cp "./app/build/outputs/apk/api29/release/app-api29-release-unsigned.apk" app/build/outputs/apk/release/
+          cp "./app/build/outputs/apk/default/release/app-default-release-unsigned.apk"  app/build/outputs/apk/release/mpv-default.apk
+          cp "./app/build/outputs/apk/api29/release/app-api29-release-unsigned.apk" app/build/outputs/apk/release/mpv-api29.apk
       - name: Sign APK
         uses: r0adkll/sign-android-release@v1
         # ID used to access action output
@@ -168,8 +168,8 @@ jobs:
       - name: relocate apks
         run: |
           mkdir -p app/build/outputs/apk/release
-          cp "./app/build/outputs/apk/default/release/app-default-release-unsigned.apk"  app/build/outputs/apk/release/
-          cp "./app/build/outputs/apk/api29/release/app-api29-release-unsigned.apk" app/build/outputs/apk/release/
+          cp "./app/build/outputs/apk/default/release/app-default-release-unsigned.apk"  app/build/outputs/apk/release/mpv-default.apk
+          cp "./app/build/outputs/apk/api29/release/app-api29-release-unsigned.apk" app/build/outputs/apk/release/mpv-api29.apk
       - name: Sign APK
         uses: r0adkll/sign-android-release@v1
         # ID used to access action output
