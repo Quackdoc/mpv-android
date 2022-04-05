@@ -66,13 +66,9 @@ jobs:
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
         keyPassword: ${{ secrets.KEY_PASSWORD }}
         
-    - name: example release
-      uses: "marvinpinto/action-automatic-releases@latest"
-      with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: "latest"
-        prerelease: true
-        title: "Release X"
-        files: |
+  - uses: actions/upload-artifact@v2
+    with:
+      name: Signed app bundle
+      path: |
           ${{ steps.sign_app.signedReleaseFile0 }}
           ${{ steps.sign_app.signedReleaseFile1 }}
