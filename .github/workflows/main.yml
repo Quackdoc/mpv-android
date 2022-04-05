@@ -70,9 +70,8 @@ jobs:
       with:
         name: pull-request-build
         path: |
-              ${{ steps.sign_app.signedReleaseFile0 }}
-              ${{ steps.sign_app.signedReleaseFile1 }}
-
+              app/build/outputs/apk/release/mpv-default-signed.apk
+              app/build/outputs/apk/release/mpv-api29-signed.apk
 
 
   x86:
@@ -129,8 +128,8 @@ jobs:
         with:
           name: pull-request-build
           path: |
-                ${{ steps.sign_app.signedReleaseFile0 }}
-                ${{ steps.sign_app.signedReleaseFile1 }}
+                app/build/outputs/apk/release/mpv-default-signed.apk
+                app/build/outputs/apk/release/mpv-api29-signed.apk
   Arm86:
       runs-on: ubuntu-20.04
       steps:
@@ -185,5 +184,5 @@ jobs:
         with:
           name: pull-request-build
           path: |
-                ${{ steps.sign_app.signedReleaseFile0 }}
-                ${{ steps.sign_app.signedReleaseFile1 }}}
+                app/build/outputs/apk/release/mpv-default-signed.apk
+                app/build/outputs/apk/release/mpv-api29-signed.apk
