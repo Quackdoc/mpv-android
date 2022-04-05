@@ -65,12 +65,15 @@ jobs:
         alias: ${{ secrets.ALIAS }}
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
         keyPassword: ${{ secrets.KEY_PASSWORD }}
-    - uses: actions/upload-artifact@v2
-        with:
-        name: upload
-          path: |
+    - name : upload APKs
+      uses: actions/upload-artifact@v2
+      with:
+        name: pull-request-build
+        path: |
               ${{ steps.sign_app.signedReleaseFile0 }}
               ${{ steps.sign_app.signedReleaseFile1 }}
+
+
 
   Vanilla:
       runs-on: ubuntu-20.04
@@ -121,10 +124,11 @@ jobs:
           alias: ${{ secrets.ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-      - uses: actions/upload-artifact@v2
-          with:
-          name: upload
-            path: |
+      - name : upload APKs
+        uses: actions/upload-artifact@v2
+        with:
+          name: pull-request-build
+          path: |
                 ${{ steps.sign_app.signedReleaseFile0 }}
                 ${{ steps.sign_app.signedReleaseFile1 }}
   Arm86:
@@ -176,9 +180,10 @@ jobs:
           alias: ${{ secrets.ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-      - uses: actions/upload-artifact@v2
-          with:
-            name: Upload
-            path: |
+      - name : upload APKs
+        uses: actions/upload-artifact@v2
+        with:
+          name: pull-request-build
+          path: |
                 ${{ steps.sign_app.signedReleaseFile0 }}
-                ${{ steps.sign_app.signedReleaseFile1 }}
+                ${{ steps.sign_app.signedReleaseFile1 }}}
