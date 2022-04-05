@@ -65,10 +65,9 @@ jobs:
         alias: ${{ secrets.ALIAS }}
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
         keyPassword: ${{ secrets.KEY_PASSWORD }}
-    - name: upload signed apks
+    - name: Upload
       uses: actions/upload-artifact@v2
         with:
-          name: Signed app bundle
           path: |
               ${{ steps.sign_app.signedReleaseFile0 }}
               ${{ steps.sign_app.signedReleaseFile1 }}
@@ -122,10 +121,9 @@ jobs:
           alias: ${{ secrets.ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-      - name: upload signed apks
+      - name: Upload
         uses: actions/upload-artifact@v2
           with:
-            name: Signed app bundle
             path: |
                 ${{ steps.sign_app.signedReleaseFile0 }}
                 ${{ steps.sign_app.signedReleaseFile1 }}
@@ -178,10 +176,9 @@ jobs:
           alias: ${{ secrets.ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-      - name: upload signed apks
+      - name: Upload
         uses: actions/upload-artifact@v2
           with:
-            name: Signed app bundle
             path: |
                 ${{ steps.sign_app.signedReleaseFile0 }}
                 ${{ steps.sign_app.signedReleaseFile1 }}
