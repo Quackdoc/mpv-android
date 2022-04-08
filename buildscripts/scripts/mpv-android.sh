@@ -24,7 +24,6 @@ nativeprefix () {
 	fi
 }
 
-prefix32=$(nativeprefix "armv7l")
 prefix64=$(nativeprefix "arm64")
 prefix_x64=$(nativeprefix "x86_64")
 prefix_x86=$(nativeprefix "x86")
