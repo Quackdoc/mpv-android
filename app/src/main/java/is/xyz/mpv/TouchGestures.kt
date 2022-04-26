@@ -5,7 +5,8 @@ import android.content.res.Resources
 import android.graphics.PointF
 import android.os.SystemClock
 import android.view.MotionEvent
-import kotlin.math.*
+import kotlin.math.abs
+import kotlin.math.min
 
 enum class PropertyChange {
     Init,
@@ -36,21 +37,25 @@ class TouchGestures(private val observer: TouchGesturesObserver) {
     }
 
     private var state = State.Up
+
     // relevant movement direction for the current state (0=H, 1=V)
     private var stateDirection = 0
 
     // timestamp of the last tap (ACTION_UP)
     private var lastTapTime = 0L
+
     // when the current gesture began
     private var lastDownTime = 0L
 
     // where user initially placed their finger (ACTION_DOWN)
     private var initialPos = PointF()
+
     // last non-throttled processed position
     private var lastPos = PointF()
 
     private var width: Float = 0f
     private var height: Float = 0f
+
     // minimum movement which triggers a Control state
     private var trigger: Float = 0f
 
@@ -58,9 +63,9 @@ class TouchGestures(private val observer: TouchGesturesObserver) {
     private var gestureHoriz = State.Down
     private var gestureVertLeft = State.Down
     private var gestureVertRight = State.Down
-    private var tapGestureLeft : PropertyChange? = null
-    private var tapGestureCenter : PropertyChange? = null
-    private var tapGestureRight : PropertyChange? = null
+    private var tapGestureLeft: PropertyChange? = null
+    private var tapGestureCenter: PropertyChange? = null
+    private var tapGestureRight: PropertyChange? = null
 
     fun setMetrics(width: Float, height: Float) {
         this.width = width
@@ -108,17 +113,16 @@ class TouchGestures(private val observer: TouchGesturesObserver) {
             lastTapTime = 0 // finger was held too long, reset
             return false
         }
-        if (now - lastTapTime < TAP_DURATION) {
+        lastTapTime = if (now - lastTapTime < TAP_DURATION) {
             // [ Left 28% ] [    Center    ] [ Right 28% ]
-            if (p.x <= width * 0.28f)
-                tapGestureLeft?.let { sendPropertyChange(it, -1f); return true }
-            else if (p.x >= width * 0.72f)
-                tapGestureRight?.let { sendPropertyChange(it, 1f); return true }
-            else
-                tapGestureCenter?.let { sendPropertyChange(it, 0f); return true }
-            lastTapTime = 0
+            when {
+                p.x <= width * 0.28f -> tapGestureLeft?.let { sendPropertyChange(it, -1f); return true }
+                p.x >= width * 0.72f -> tapGestureRight?.let { sendPropertyChange(it, 1f); return true }
+                else -> tapGestureCenter?.let { sendPropertyChange(it, 0f); return true }
+            }
+            0
         } else {
-            lastTapTime = now
+            now
         }
         return false
     }
@@ -169,9 +173,9 @@ class TouchGestures(private val observer: TouchGesturesObserver) {
             if (v.isNullOrEmpty()) resources.getString(defaultRes) else v
         }
         val map = mapOf(
-                "bright" to State.ControlBright,
-                "seek" to State.ControlSeek,
-                "volume" to State.ControlVolume
+            "bright" to State.ControlBright,
+            "seek" to State.ControlSeek,
+            "volume" to State.ControlVolume
         )
         val map2 = mapOf(
             "seek" to PropertyChange.SeekFixed,
