@@ -1,0 +1,38 @@
+name: build
+
+on:
+  - push
+  - pull_request
+
+jobs:
+
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: temurin
+
+      - name: Remove stray python binary symlinks
+        run: |
+          find /usr/local/bin -lname '*/Library/Frameworks/Python.framework/*' -delete -print
+          brew unlink python && brew link --overwrite python
+
+      - name: Install deps
+        run: |
+          brew update
+          brew install automake autoconf libtool pkg-config coreutils gnu-sed wget meson ninja
+        env:
+          HOMEBREW_NO_INSTALL_CLEANUP: 1
+
+      - name: Download deps
+        run: |
+          cd buildscripts
+          mkdir -p sdk && ln -s "$ANDROID_HOME" sdk/android-sdk-mac
+          TRAVIS=1 ./download.sh
+
+      - name: Build
+        run: |
+          cd buildscripts && ./buildall.sh
