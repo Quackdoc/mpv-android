@@ -7,10 +7,13 @@ android {
     compileSdkVersion 30
 
     defaultConfig {
-        minSdkVersion 21
+
+        minSdkVersion 24
+        // Do NOT bump this to 30 before figuring out the implications of scoped storage
         targetSdkVersion 30
-        versionCode 28
-        versionName "2022-03-23-release"
+        versionCode 26
+        versionName "2021-10-28-release"
+
         vectorDrawables.useSupportLibrary = true
     }
 

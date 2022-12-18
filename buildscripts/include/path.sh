@@ -23,7 +23,14 @@ if [ -n "$ndk_triple" ]; then
 	unset PKG_CONFIG_PATH
 fi
 
+if [ "$ISGIT" == "yes" ]; then 
+
 SDK=/usr/local/lib/android/sdk
-NDK=$SDK/ndk/24.0.8215888
+else
+SDK=/opt/android-sdk
+fi
+
+NDK=$SDK/ndk/23.2.8568313
 toolchain=$(echo "$NDK/toolchains/llvm/prebuilt/"*)
-export PATH="$toolchain/bin:$NDK:$SDK/bin:$PATH"
+#vkbeta=$(echo "$NDK/sources/third_party/vulkan/src/include/vulkan/")
+export PATH="$vkbeta:$toolchain/bin:$NDK:$SDK/bin:$PATH"
