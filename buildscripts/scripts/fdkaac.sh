@@ -37,9 +37,10 @@ echo "void android_errorWriteLog(int i, const char *string){}" > libSBRdec/inclu
 ./configure --host=$target \
 --disable-shared \
 --disable-frontend \
---enable-static \
---prefix="$prefix_dir"
+--enable-static
+#--prefix="$prefix_dir" ##disable for arm32 builds
 
+make clean
 make -j$cores 
 make DESTDIR="$prefix_dir" install 
 #unset CC CXX # meson wants these unset
