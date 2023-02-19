@@ -40,14 +40,14 @@ jobs:
       - name: relocate apks
         run: |
           mkdir -p app/build/outputs/apk/release
-          cp ./app/build/outputs/apk/api29/debug/app-api29-armeabi-v7a-debug.apk
-          cp ./app/build/outputs/apk/api29/debug/app-api29-universal-debug.apk
-          cp ./app/build/outputs/apk/api29/release/app-api29-armeabi-v7a-release-unsigned.apk
-          cp ./app/build/outputs/apk/api29/release/app-api29-universal-release-unsigned.apk
-          cp ./app/build/outputs/apk/default/debug/app-default-armeabi-v7a-debug.apk
-          cp ./app/build/outputs/apk/default/debug/app-default-universal-debug.apk
-          cp ./app/build/outputs/apk/default/release/app-default-armeabi-v7a-release-unsigned.apk
-          cp ./app/build/outputs/apk/default/release/app-default-universal-release-unsigned.apk
+          cp ./app/build/outputs/apk/api29/debug/app-api29-armeabi-v7a-debug.apk app/build/outputs/apk/release/
+          cp ./app/build/outputs/apk/api29/debug/app-api29-universal-debug.apk app/build/outputs/apk/release/
+          cp ./app/build/outputs/apk/api29/release/app-api29-armeabi-v7a-release-unsigned.apk app/build/outputs/apk/release/
+          cp ./app/build/outputs/apk/api29/release/app-api29-universal-release-unsigned.apk app/build/outputs/apk/release/
+          cp ./app/build/outputs/apk/default/debug/app-default-armeabi-v7a-debug.apk app/build/outputs/apk/release/
+          cp ./app/build/outputs/apk/default/debug/app-default-universal-debug.apk app/build/outputs/apk/release/
+          cp ./app/build/outputs/apk/default/release/app-default-armeabi-v7a-release-unsigned.apk app/build/outputs/apk/release/
+          cp ./app/build/outputs/apk/default/release/app-default-universal-release-unsigned.apk app/build/outputs/apk/release/
           
       - name: Sign APK
         uses: r0adkll/sign-android-release@v1
@@ -64,11 +64,11 @@ jobs:
         with:
           name: Vanilla-Build
           path: |
-            app/build/outputs/apk/api29/debug/app-api29-armeabi-v7a-debug.apk
-            app/build/outputs/apk/api29/debug/app-api29-universal-debug.apk
-            app/build/outputs/apk/api29/release/app-api29-armeabi-v7a-release-unsigned.apk
-            app/build/outputs/apk/api29/release/app-api29-universal-release-unsigned.apk
-            app/build/outputs/apk/default/debug/app-default-armeabi-v7a-debug.apk
-            app/build/outputs/apk/default/debug/app-default-universal-debug.apk
-            app/build/outputs/apk/default/release/app-default-armeabi-v7a-release-unsigned.apk
-            app/build/outputs/apk/default/release/app-default-universal-release-unsigned.apk
+            app/build/outputs/apk/release/app-api29-armeabi-v7a-debug.apk
+            app/build/outputs/apk/release/app-api29-universal-debug.apk
+            app/build/outputs/apk/release/app-api29-armeabi-v7a-release-unsigned.apk
+            app/build/outputs/apk/release/app-api29-universal-release-unsigned.apk
+            app/build/outputs/apk/release/app-default-armeabi-v7a-debug.apk
+            app/build/outputs/apk/release/app-default-universal-debug.apk
+            app/build/outputs/apk/release/app-default-armeabi-v7a-release-unsigned.apk
+            app/build/outputs/apk/release/app-default-universal-release-unsigned.apk
