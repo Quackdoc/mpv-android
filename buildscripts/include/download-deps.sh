@@ -17,6 +17,12 @@ fi
 # dav1d
 [ ! -d dav1d ] && git clone https://github.com/videolan/dav1d
 
+# libjxl
+[ ! -d libjxl ] && git clone https://github.com/libjxl/libjxl
+
+# brotli
+[ ! -d brotli ] && git clone https://github.com/google/brotli.git 
+
 # ffmpeg
 if [ ! -d ffmpeg ]; then
 	git clone https://github.com/FFmpeg/FFmpeg ffmpeg
